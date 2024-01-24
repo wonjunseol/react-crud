@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { useRecoilState } from "recoil";
+import { useNavigate } from  "react-router-dom";
 
 const Main = () => {
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate("/board");
+    };
+
     return (
-        <div> Hello, World! </div>
+        <button onClick = {handleClick}>게시판으로</button>
     );
 };
 export default Main;
