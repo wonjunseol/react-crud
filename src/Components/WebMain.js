@@ -12,7 +12,7 @@ const Main = () => {
     };
 
     return (
-        <button onClick = {handleClick}>게시판으로</button>
+        <button onClick = {handleClick}>게시판으로 이동</button>
     );
 };
 export default Main;
