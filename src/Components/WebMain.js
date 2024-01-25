@@ -5,10 +5,7 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/board");
-  };
+  
   const imageUrl = "/logo192.png";
 
   return (
@@ -29,7 +26,7 @@ const Main = () => {
 
           <ButtonContainer>
             {/* 넷바 나오기 전까지 앱스토어 버튼 사용*/}
-            <Button onClick={handleClick}> App Store</Button>
+            <Button>App Store</Button>
             <Button>Google Play</Button>
           </ButtonContainer>
 
