@@ -8,12 +8,11 @@ import { getBoard } from "../Api/Api";
 const Board = () => {
   const [boardInfo, setBoardInfo] = useState([]);
   const columns = [
-    { key: "id", label: ""},
+    { key: "id", label: "" },
     { key: "title", label: "제목" },
     { key: "author", label: "작성자" },
     { key: "content", label: "내용" },
     { key: "createdAt", label: "작성일" },
-
   ];
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +37,7 @@ const Board = () => {
         <StyledTable>
           <thead>
             <tr>
+
               {columns.map((column) => (
                 <th key={column.key}>{column.label}</th>
               ))}

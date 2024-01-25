@@ -24,23 +24,23 @@ const Write = () => {
 
   return (
     <Container>
-      <TitleInput>
-        type="text"
-        placeholder="제목을 입력하세요."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      </TitleInput>
-      <TitleInput>
-        type="text"
-        placeholder="작성자 이름을 입력하세요."
-        value={writer}
-        onChange={(e) => setWriter(e.target.value)}
-      </TitleInput>
-      <ContentInput>
-        placeholder="내용을 입력하세요."
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      </ContentInput>
+        <TitleInput
+            type="text"
+            placeholder="제목을 입력하세요."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+        />
+        <TitleInput
+            type="text"
+            placeholder="작성자 이름을 입력하세요."
+            value={writer}
+            onChange={(e) => setWriter(e.target.value)}
+        />
+        <ContentInput
+            placeholder="내용을 입력하세요."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+        />
       <ButtonContainer>
         <SaveButton onClick={handleSave}>저장</SaveButton>
         <CancelButton onClick={handleCancel}>취소</CancelButton>
