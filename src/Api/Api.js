@@ -6,7 +6,6 @@ export const getBoard = async () => {
         `${process.env.REACT_APP_URL}board`
       );
       console.log(response.data);
-  
       return response.data;
     } catch (error) {
       console.error("Error fetching board:", error);
