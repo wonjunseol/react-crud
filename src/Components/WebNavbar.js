@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { useRecoilState } from "recoil";
-import { useNavigate } from  "react-router-dom";
+import { useNavigate, useLocation } from  "react-router-dom";
 
 const NavbarContainer = styled.div`
     display: flex;
@@ -10,6 +10,7 @@ const NavbarContainer = styled.div`
     align-items: center;
     height: 50px;
     background-color: yellow; /* 네비게이션 바 배경색 설정 */
+    width: 100%;
     
 `;
 
@@ -26,19 +27,26 @@ const Menu = styled.div`
 
 const WebNavbar = () => {
     const navigate = useNavigate();
-    
+    const location = useLocation();
+
+    const handleClickWrite = () => {
+        navigate("/write");  // Board페이지로 이동
+    }
     const handleClick = () => {
         navigate("/board");  // Board페이지로 이동
     };
-    const handleGoBack = () => {
+    const handleGoBack = () => { // 이전화면으로 이동
         navigate("../");
     };
-    const handleGoRoot = () => {
+    const handleGoRoot = () => { // 첫화면으로 이동
         navigate("/");
     };
 
     return (
-        <NavbarContainer className = "navWrapper">
+        <NavbarContainer>
+            {location.pathname === "/board" && (
+                <Menu onClick={handleClickWrite}>글쓰기</Menu>
+            )}
             <Menu onClick = {handleClick}>게시판</Menu>
             <Menu onClick = {handleGoBack}>이전화면</Menu>
             <Menu onClick = {handleGoRoot}>첫화면</Menu>
