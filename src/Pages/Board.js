@@ -1,14 +1,14 @@
 import React from "react";
-import WebMain from "../Components/WebMain";
+import WebBoard from "../Components/WebBoard";
 import WebNavbar from "../Components/WebNavbar";
 
-const Main = () => {
+const Board = () => {
   return (
     <div>
       <WebNavbar />
-      <WebMain />
+      <WebBoard />
     </div>
   );
 };
 
-export default Main;
+export default Board;
