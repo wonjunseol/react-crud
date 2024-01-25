@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {
-  
   const imageUrl = "/logo192.png";
 
   return (
