@@ -7,12 +7,11 @@ import { getBoard } from "../Api/Api";
 const Board = () => {
   const [boardInfo, setBoardInfo] = useState([]);
   const columns = [
-    { key: "id", label: ""},
+    { key: "id", label: "" },
     { key: "title", label: "제목" },
     { key: "author", label: "작성자" },
     { key: "content", label: "내용" },
     { key: "createdAt", label: "작성일" },
-
   ];
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +32,7 @@ const Board = () => {
 
   return (
     <>
+      <GlobalStyle />
       <StyledTable>
         <thead>
           <tr>
@@ -54,7 +54,12 @@ const Board = () => {
     </>
   );
 };
-
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin : 0;
+    padding: 0;
+  }
+`;
 const StyledTable = styled.table`
   /* 필요한 스타일 추가 */
 `;
