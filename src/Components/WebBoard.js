@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { getBoard } from "../Api/Api";
+
 const Board = () => {
   const [boardInfo, setBoardInfo] = useState([]);
   const columns = [
@@ -33,34 +34,38 @@ const Board = () => {
   return (
     <>
       <GlobalStyle />
-      <StyledTable>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.key}>{column.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {boardInfo.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+        <StyledTable>
+          <thead>
+            <tr>
+
               {columns.map((column) => (
-                <td key={column.key}>{row[column.key]}</td>
+                <th key={column.key}>{column.label}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </StyledTable>
+          </thead>
+          <tbody>
+            {boardInfo.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {columns.map((column) => (
+                  <td key={column.key}>{row[column.key]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
     </>
   );
 };
+
+const StyledTable = styled.table`
+  /* 필요한 스타일 추가 */
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin : 0;
     padding: 0;
   }
 `;
-const StyledTable = styled.table`
-  /* 필요한 스타일 추가 */
-`;
+
 export default Board;
