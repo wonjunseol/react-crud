@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { createGlobalStyle } from "styled-components";
 
-const Write = () => {
+const WebEdit = () => {
+  const location = useLocation();
+  const postId = location.pathname.split("/")[2]; // 경로에서 postId 추출
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const handleSave = async () => { // 서버에 데이터 전송
+  const handleEdit = async () => { // 서버에 데이터 전송
     try {
-      const response = await axios.post(`${process.env.REACT_APP_URL}board`, {
+      const response = await axios.patch(`${process.env.REACT_APP_URL}board`, {
+        postId : postId,
         title: title,
-        author: author,
         content: content,
       });
       console.log("Response from server:", response.data);
@@ -24,35 +26,39 @@ const Write = () => {
   };
 
   const handleCancel = () => { // 취소 후 게시판으로 이동
-    navigate("/board");
+    navigate(`/board/${postId}`);
   };
 
   return (
+    <>
+    <GlobalStyle />
     <Container>
         <TitleInput
             type="text"
-            placeholder="제목을 입력하세요."
+            placeholder="수정할 제목을 입력하세요."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
         />
-        <TitleInput
-            type="text"
-            placeholder="작성자 이름을 입력하세요."
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-        />
         <ContentInput
-            placeholder="내용을 입력하세요."
+            placeholder="수정할 내용을 입력하세요."
             value={content}
             onChange={(e) => setContent(e.target.value)}
         />
-      <ButtonContainer>
-        <SaveButton onClick={handleSave}>저장</SaveButton>
+    <ButtonContainer>
+        <SaveButton onClick={handleEdit}>수정하기</SaveButton>
         <CancelButton onClick={handleCancel}>취소</CancelButton>
-      </ButtonContainer>
+    </ButtonContainer>
     </Container>
+    </>
   );
 };
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin : 0;
+    padding: 0;
+  }
+`;
 
 const Container = styled.div`
   max-width: 600px;
@@ -99,4 +105,4 @@ const CancelButton = styled.button`
   cursor: pointer;
 `;
 
-export default Write;
+export default WebEdit;
