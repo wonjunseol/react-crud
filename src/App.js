@@ -4,6 +4,7 @@ import Main from "./Pages/Main";
 import Board from "./Pages/Board";
 import Write from "./Pages/Write";
 import Content from "./Pages/Content";
+import Edit from "./Pages/Edit";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/board" element={<Board />} />
         <Route path="/write" element={<Write />} />
         <Route path="/board/:postId" element={<Content />} />
+        <Route path="/board/:postId/edit" element={<Edit />} />
       </Routes>
     </Router>
   );
