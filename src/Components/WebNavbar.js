@@ -4,6 +4,35 @@ import { createGlobalStyle } from "styled-components";
 import { useRecoilState } from "recoil";
 import { useNavigate, useLocation } from  "react-router-dom";
 
+const WebNavbar = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleClickWrite = () => {
+        navigate("/write");  // Board페이지로 이동
+    }
+    const handleClick = () => {
+        navigate("/board");  // Board페이지로 이동
+    };
+    const handleGoBack = () => { // 이전화면으로 이동
+        navigate(-1);
+    };
+    const handleGoRoot = () => { // 첫화면으로 이동
+        navigate("/");
+    };
+
+    return (
+        <NavbarContainer>
+            {location.pathname === "/board" && (
+                <Menu onClick={handleClickWrite}>글쓰기</Menu>
+            )}
+            <Menu onClick = {handleClick}>게시판</Menu>
+            <Menu onClick = {handleGoBack}>이전화면</Menu>
+            <Menu onClick = {handleGoRoot}>첫화면</Menu>
+        </NavbarContainer>
+    );
+}
+
 const NavbarContainer = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -24,34 +53,5 @@ const Menu = styled.div`
   background-color: black; /* 배경색 설정 */
   color: white; /* 글자색 설정 */
 `;
-
-const WebNavbar = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const handleClickWrite = () => {
-        navigate("/write");  // Board페이지로 이동
-    }
-    const handleClick = () => {
-        navigate("/board");  // Board페이지로 이동
-    };
-    const handleGoBack = () => { // 이전화면으로 이동
-        navigate("../");
-    };
-    const handleGoRoot = () => { // 첫화면으로 이동
-        navigate("/");
-    };
-
-    return (
-        <NavbarContainer>
-            {location.pathname === "/board" && (
-                <Menu onClick={handleClickWrite}>글쓰기</Menu>
-            )}
-            <Menu onClick = {handleClick}>게시판</Menu>
-            <Menu onClick = {handleGoBack}>이전화면</Menu>
-            <Menu onClick = {handleGoRoot}>첫화면</Menu>
-        </NavbarContainer>
-    );
-}
 
 export default WebNavbar;

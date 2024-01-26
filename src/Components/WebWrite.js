@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Write = () => {
   const [title, setTitle] = useState("");
-  const [writer, setWriter] = useState("");
+  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const handleSave = () => {
-    // 저장 로직을 추가할 부분
-    console.log("Title:", title);
-    console.log("Writer: ", writer);
-    console.log("Content:", content);
-
-    // 저장 후 게시판으로 이동
-    navigate("/board");
+  const handleSave = async () => { // 서버에 데이터 전송
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_URL}board`, {
+        title: title,
+        author: author,
+        content: content,
+      });
+      console.log("Response from server:", response.data);
+      navigate("/board"); // 저장 후 게시판으로 이동
+    } catch (error) {
+      console.error("Error savaaaaing data:", error);
+    }
   };
 
   const handleCancel = () => { // 취소 후 게시판으로 이동
@@ -33,8 +38,8 @@ const Write = () => {
         <TitleInput
             type="text"
             placeholder="작성자 이름을 입력하세요."
-            value={writer}
-            onChange={(e) => setWriter(e.target.value)}
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
         />
         <ContentInput
             placeholder="내용을 입력하세요."

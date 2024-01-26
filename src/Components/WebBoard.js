@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { getBoard } from "../Api/Api";
+import { getAllBoards } from "../Api/Api";
 
 const Board = () => {
   const [boardInfo, setBoardInfo] = useState([]);
+  const navigate = useNavigate();
   const columns = [
     { key: "id", label: "id" },
     { key: "title", label: "제목" },
@@ -17,7 +18,7 @@ const Board = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getBoard();
+        const response = await getAllBoards();
         if (response && response.boardResponseList) {
           const sortedBoardInfo = response.boardResponseList.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -42,6 +43,10 @@ const Board = () => {
     return `${year}/${month}/${day}`;
   };
 
+  const handleTitleClick = (postId) => { // 제목을 클릭했을 때 글 보기 페이지로 이동
+    navigate(`/board/${postId}`);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -61,7 +66,11 @@ const Board = () => {
                 (column) =>
                   !column.hidden &&
                   column.key !== "content" && (
-                    <td key={column.key}>
+                    <td key={column.key}
+                      onClick={() =>
+                        column.key === "title" && handleTitleClick(row["id"])
+                      }
+                    >
                       {column.key === "createdAt"
                         ? formatDate(row[column.key])
                         : row[column.key]}
@@ -82,7 +91,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 const StyledTable = styled.table`
-  /* 필요한 스타일 추가 */
+  td {
+    cursor: pointer; /* 제목에 커서를 갖다 대면 클릭하는 모션이 되도록 */
+  }
 `;
 
 export default Board;
