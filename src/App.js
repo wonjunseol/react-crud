@@ -5,6 +5,7 @@ import Board from "./Pages/Board";
 import Write from "./Pages/Write";
 import Content from "./Pages/Content";
 import Edit from "./Pages/Edit";
+import Chatbot from "./Pages/Chatbot";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/board/:postId" element={<Content />} />
         <Route path="/board/:postId/edit" element={<Edit />} />
+        <Route path="/chat" element={<Chatbot />} />
       </Routes>
     </Router>
   );

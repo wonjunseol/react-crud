@@ -9,10 +9,13 @@ const WebNavbar = () => {
     const location = useLocation();
 
     const handleClickWrite = () => {
-        navigate("/write");  // Board페이지로 이동
+        navigate("/write");  // wirte페이지로 이동
     }
     const handleClick = () => {
-        navigate("/board");  // Board페이지로 이동
+        navigate("/board");  // board페이지로 이동
+    };
+    const handleChatbot = () => {
+        navigate("/chat");  // chat페이지로 이동
     };
     const handleGoBack = () => { // 이전화면으로 이동
         navigate(-1);
@@ -26,6 +29,7 @@ const WebNavbar = () => {
             {location.pathname === "/board" && (
                 <Menu onClick={handleClickWrite}>글쓰기</Menu>
             )}
+            <Menu onClick = {handleChatbot}>챗봇</Menu>
             <Menu onClick = {handleClick}>게시판</Menu>
             <Menu onClick = {handleGoBack}>이전화면</Menu>
             <Menu onClick = {handleGoRoot}>첫화면</Menu>
